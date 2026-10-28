@@ -1,0 +1,22 @@
+{
+  "name": "kroma-content-os",
+  "version": "1.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Kroma Studio — Content CRM, calendario editorial y analítica de conversión para Instagram, TikTok e Historias.",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js",
+    "check": "node --check server.js && node --check public/app.js && node --check seed.js"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "keywords": [
+    "content-crm",
+    "social-media",
+    "bento-ui",
+    "kroma-studio"
+  ],
+  "license": "UNLICENSED"
+}

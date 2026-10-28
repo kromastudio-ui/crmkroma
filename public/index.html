@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#0F0F12" />
+    <meta
+      name="description"
+      content="Kroma Studio Content OS — CRM de contenido, calendario editorial y analítica de conversión para Instagram, TikTok e Historias."
+    />
+    <title>Kroma Studio — Content OS</title>
+    <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml" />
+    <link rel="preload" href="/assets/fonts/PlusJakartaSans-latin.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <div class="grain" aria-hidden="true"></div>
+
+    <div class="boot" id="boot">
+      <div class="boot-mark">K</div>
+      <div class="boot-copy">
+        <strong>KROMA</strong>
+        <span>Content OS</span>
+      </div>
+      <div class="boot-bar"><span></span></div>
+    </div>
+
+    <div class="app-shell is-loading" id="appShell">
+      <!-- 01 · Mini rail -->
+      <aside class="rail" id="rail" aria-label="Navegación principal"></aside>
+
+      <!-- 02 · Control + worklist -->
+      <aside class="queue" aria-label="Cola de contenido">
+        <header class="queue-head">
+          <div>
+            <div class="eyebrow eyebrow-light">
+              <span class="live-dot"></span> Content OS
+            </div>
+            <h1 class="queue-title">Tu semana<span>.</span></h1>
+          </div>
+          <div class="queue-head-actions">
+            <button class="queue-close" data-action="toggle-queue" aria-label="Cerrar cola de contenido">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
+            </button>
+            <button class="round-btn round-btn-yellow" data-action="new-post" aria-label="Crear contenido">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>
+            </button>
+          </div>
+        </header>
+
+        <div class="queue-scroll">
+          <section class="kpi-grid" id="kpiGrid" aria-label="Indicadores rápidos"></section>
+
+          <section class="queue-tools" aria-label="Filtros de contenido">
+            <div class="queue-tool-row">
+              <div class="segmented segmented-dark" id="periodToggle" role="group" aria-label="Periodo">
+                <button type="button" class="is-active" data-period="month">Mes</button>
+                <button type="button" data-period="week">Semana</button>
+              </div>
+              <div class="month-select-wrap">
+                <select id="monthSelect" class="month-select" aria-label="Seleccionar mes"></select>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg>
+              </div>
+            </div>
+            <div class="channel-scroll" id="channelFilters" role="group" aria-label="Filtrar por canal">
+              <button class="chip chip-dark is-active" data-channel="all">Todos <span id="countAll">0</span></button>
+              <button class="chip chip-dark" data-channel="reel">Reels / TikTok</button>
+              <button class="chip chip-dark" data-channel="story">Historias</button>
+              <button class="chip chip-dark" data-channel="carousel">Carrusel</button>
+            </div>
+          </section>
+
+          <div class="worklist-head">
+            <div>
+              <span class="section-kicker">Content worklist</span>
+              <span class="section-count" id="worklistCount">0 piezas</span>
+            </div>
+            <button class="mini-icon-btn" id="searchToggle" data-action="focus-search" aria-label="Buscar contenido">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+            </button>
+          </div>
+          <div class="queue-search" id="queueSearchWrap" hidden>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+            <input id="queueSearch" type="search" placeholder="Buscar gancho, pilar o estado…" autocomplete="off" />
+            <button type="button" data-action="clear-search" aria-label="Limpiar búsqueda">×</button>
+          </div>
+
+          <div class="worklist" id="worklist"></div>
+
+          <div class="queue-empty" id="queueEmpty" hidden>
+            <span class="queue-empty-icon">∅</span>
+            <strong>Nada por acá</strong>
+            <p>Probá otro filtro o creá una pieza nueva para esta semana.</p>
+            <button class="pill pill-yellow" data-action="new-post">Nueva pieza</button>
+          </div>
+        </div>
+
+        <footer class="queue-foot">
+          <button class="queue-foot-api" data-action="api-status">
+            <span class="api-dot" id="apiDot"></span>
+            <span id="apiLabel">Conectando API…</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg>
+          </button>
+          <span class="queue-foot-version">v1.1</span>
+        </footer>
+      </aside>
+
+      <!-- 03 · Workspace -->
+      <main class="main" aria-label="Workspace">
+        <header class="topbar">
+          <div class="topbar-left">
+            <button class="mobile-menu" data-action="toggle-queue" aria-label="Abrir cola de contenido">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7h16M4 12h16M4 17h10"/></svg>
+            </button>
+            <nav class="breadcrumb" id="breadcrumb" aria-label="Miga de pan"></nav>
+          </div>
+          <div class="topbar-actions">
+            <div class="api-pill" id="apiPill" data-action="api-status" role="button" tabindex="0" title="Estado de la API">
+              <span class="api-dot"></span><span>API live</span>
+            </div>
+            <button class="icon-btn insights-toggle" data-action="toggle-insights" aria-label="Abrir radar de conversión" title="Radar de conversión">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg>
+            </button>
+            <button class="icon-btn" data-action="focus-search" aria-label="Buscar">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+            </button>
+            <button class="icon-btn notification-btn" data-action="notifications" aria-label="Notificaciones">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9"/><path d="M10 21h4"/></svg>
+              <span class="notif-dot"></span>
+            </button>
+            <button class="pill pill-dark topbar-cta" data-action="new-post">
+              <span>Nuevo contenido</span>
+              <span class="pill-plus">+</span>
+            </button>
+          </div>
+        </header>
+        <div class="main-scroll" id="mainScroll">
+          <div class="main-view" id="mainView"></div>
+        </div>
+      </main>
+
+      <!-- 04 · Analytics -->
+      <aside class="insights" aria-label="Analítica de conversión">
+        <header class="insights-head">
+          <div>
+            <span class="section-kicker section-kicker-dark">Radar Kroma</span>
+            <h2>Conversión</h2>
+          </div>
+          <div style="display:flex;align-items:center;gap:5px">
+            <span class="insights-live"><span class="live-dot"></span> Live</span>
+            <button class="insights-close" data-action="toggle-insights" aria-label="Cerrar analítica">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
+            </button>
+          </div>
+        </header>
+        <div class="insights-scroll" id="insightsView"></div>
+      </aside>
+    </div>
+
+    <div class="mobile-overlay" id="mobileOverlay" data-action="toggle-queue"></div>
+    <div class="insights-overlay" id="insightsOverlay" data-action="toggle-insights"></div>
+
+    <div class="modal-backdrop" id="modalBackdrop" hidden>
+      <div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle"></div>
+    </div>
+
+    <div class="toast-region" id="toasts" aria-live="polite" aria-atomic="false"></div>
+
+    <script type="module" src="/app.js"></script>
+  </body>
+</html>
